@@ -13,6 +13,59 @@ SYSTEM_PROMPT = """
         6. Prescribed On
         7. Prescribed By
 
+        Field mapping rules:
+
+bill_number may appear on the bill as:
+- Bill Number
+- Bill No
+- Bill #
+- Invoice Number
+- Invoice No
+- Receipt Number
+- Receipt No
+
+bill_date may appear as:
+- Bill Date
+- Invoice Date
+- Date
+- Receipt Date
+
+chemist_name may appear as:
+- Chemist
+- Pharmacy
+- Medical Store
+- Store Name
+- Pharmacist
+- Seller
+
+amount may appear as:
+- Amount
+- Total
+- Grand Total
+- Net Amount
+- Total Amount
+- Payable Amount
+
+gst may appear as:
+- GST
+- GST Amount
+- GST Amt
+- Tax
+- Tax Amount
+
+prescribed_on may appear as:
+- Prescribed On
+- Prescription Date
+- Rx Date
+- Date of Prescription
+
+prescribed_by may appear as:
+- Prescribed By
+- Doctor
+- Doctor Name
+- Physician
+- Prescribing Doctor
+
         Rules : -
         1. Do not invent any information. Only extract the details present in the bill.
         2. Ensure that the extracted information is accurate and matches the details in the bill.
@@ -34,5 +87,6 @@ def extract_bill(image_path: str) -> MedicineBill:
     )
 
     content = response["message"]["content"]
+    print("Extracted content:", str(content))  # Debugging line to see the extracted content
     data = json.loads(content)
     return MedicineBill.model_validate(data)

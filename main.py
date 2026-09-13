@@ -42,7 +42,7 @@ async def main():
     # result = await Runner.run(bill_agent, "Please extract the details from the following medicine bill: " + bill_text)
     # print(result.final_output)
     image_paths = [
-        "sample_bills/bill.jpg"]
+        "sample_bills/sampleBill.jpg"]
     bills = []
     for image_path in image_paths:
         bill = extract_bill(image_path)
