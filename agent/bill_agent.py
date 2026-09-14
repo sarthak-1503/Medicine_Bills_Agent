@@ -20,7 +20,7 @@ bill_agent = Agent(
         4. The output should be structured according to the MedicineBill model defined in models/bill.py.
         5. Preserve the values from the bill.
         6. Do not calculate values unless explicitly instructed to do so.
-        7. Extract every medicine bill separaltely and return them as a list of MedicineBill objects.
+        7. Extract every medicine bill separately and return them as a list of MedicineBill objects.
     """,
     output_type=MedicineBill
 )
