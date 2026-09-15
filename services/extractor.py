@@ -30,6 +30,22 @@ bill_date may appear as:
 - Date
 - Receipt Date
 
+Along with above condition for different display labels of bill_date, assign bill_date the respective value only if it matches the following date formats and transform the date into format DD/MM/YYYY else assign None:
+- DD/MM/YYYY
+- DD.MM.YYYY
+- DD-MM-YYYY
+- YYYY/MM/DD
+- YYYY.MM.DD
+- YYYY-MM-DD
+- DD MMM YYYY
+- DD MMMM YYYY
+- MMM DD, YYYY
+- MMMM DD, YYYY
+- DD/MM/YY
+- DD.MM.YY
+- DD-MM-YY
+
+
 chemist_name may appear as:
 - Chemist
 - Pharmacy
@@ -56,8 +72,23 @@ gst may appear as:
 prescribed_on may appear as:
 - Prescribed On
 - Prescription Date
-- Rx Date
 - Date of Prescription
+if no such field is found, return None for this field.
+
+Along with above condition for different display labels of prescribed_on, assign prescribed_on the respective value only if it matches the following date formats and transform the date into format DD/MM/YYYY else assign None:
+- DD/MM/YYYY
+- DD.MM.YYYY
+- DD-MM-YYYY
+- YYYY/MM/DD
+- YYYY.MM.DD
+- YYYY-MM-DD
+- DD MMM YYYY
+- DD MMMM YYYY
+- MMM DD, YYYY
+- MMMM DD, YYYY
+- DD/MM/YY
+- DD.MM.YY
+- DD-MM-YY
 
 prescribed_by may appear as:
 - Prescribed By
@@ -86,7 +117,11 @@ def extract_bill(image_path: str) -> MedicineBill:
         ]
     )
 
+    print("Extracted response:", response) 
     content = response["message"]["content"]
-    print("Extracted content:", str(content))  # Debugging line to see the extracted content
+    print("Extracted content:", content)  # Debugging line to see the extracted content
+    content = content.replace("```json", "").replace("```", "").strip()
+    print("Extracted content after cleaning:", content)
     data = json.loads(content)
-    return MedicineBill.model_validate(data)
+    print("Extracted data:", data)
+    return MedicineBill.model_validate(data[0])

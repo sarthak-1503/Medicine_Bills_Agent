@@ -4,6 +4,7 @@ import asyncio
 from dotenv import load_dotenv
 from services.extractor import extract_bill
 from services.excel_service import save_to_excel
+from services.image_utility import resize_bill
 
 load_dotenv()
 # api_key = os.getenv("OPENAI_API_KEY")
@@ -42,10 +43,11 @@ async def main():
     # result = await Runner.run(bill_agent, "Please extract the details from the following medicine bill: " + bill_text)
     # print(result.final_output)
     image_paths = [
-        "sample_bills/sampleBill.jpg"]
+        "sample_bills/input/sampleBill.jpg"]
     bills = []
     for image_path in image_paths:
-        bill = extract_bill(image_path)
+        output_path = resize_bill(image_path, "sample_bills/input/resized_sampleBill.jpg")
+        bill = extract_bill(output_path)
         bills.append(bill)
 
     save_to_excel(bills)

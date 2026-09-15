@@ -4,7 +4,7 @@ from models.bill import MedicineBill
 
 def save_to_excel(
     bills: list[MedicineBill],
-    filename: str = "medicine_bills.xlsx"
+    filename: str = "sample_bills/output/medicine_bills.xlsx"
 ):
     workbook = Workbook()
     sheet = workbook.active
