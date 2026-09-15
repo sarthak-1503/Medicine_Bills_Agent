@@ -46,8 +46,8 @@ async def main():
         "sample_bills/input/sampleBill.jpg"]
     bills = []
     for image_path in image_paths:
-        output_path = resize_bill(image_path, "sample_bills/input/resized_sampleBill.jpg")
-        bill = extract_bill(output_path)
+        # output_path = resize_bill(image_path, "sample_bills/input/resized_sampleBill.jpg")
+        bill = extract_bill(image_path)
         bills.append(bill)
 
     save_to_excel(bills)
